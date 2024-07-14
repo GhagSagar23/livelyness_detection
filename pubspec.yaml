@@ -1,0 +1,67 @@
+name: livelyness_detection
+description: 'A single function package to detect weather the face visible in
+  the camera is a live face or not.'
+version: 0.0.1
+homepage: https://github.com/GhagSagar23/livelyness_detection
+repository: https://github.com/GhagSagar23/livelyness_detection/
+issue_tracker: https://github.com/GhagSagar23/livelyness_detection/issues
+
+environment:
+  sdk: '>=3.4.3 <4.0.0'
+  flutter: '>=1.17.0'
+
+dependencies:
+  animate_do: ^3.3.4
+  camera: ^0.11.0+1
+  camerawesome: ^2.0.1
+  collection: ^1.17.0
+  equatable: ^2.0.5
+  flutter:
+    sdk: flutter
+  google_mlkit_face_detection: ^0.11.0
+  image: ^4.0.15
+  lottie: ^3.1.2
+  path_provider: ^2.0.14
+  plugin_platform_interface: ^2.1.3
+  rxdart: ^0.27.7
+  uuid: ^4.4.2
+
+dev_dependencies:
+  flutter_lints: ^3.0.0
+  flutter_test:
+    sdk: flutter
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+# The following section is specific to Flutter packages.
+flutter:
+  # To add assets to your package, add an assets section, like this:
+  assets:
+    - packages/livelyness_detection/src/assets/lottie/livelyness-start.json
+    - packages/livelyness_detection/src/assets/lottie/livelyness-success.json
+    - packages/livelyness_detection/src/assets/lottie/step_completed.json
+    - packages/livelyness_detection/src/assets/final-mesh.png
+  # For details regarding assets in packages, see
+  # https://flutter.dev/assets-and-images/#from-packages
+  #
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+  # To add custom fonts to your package, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts in packages, see
+  # https://flutter.dev/custom-fonts/#from-packages
