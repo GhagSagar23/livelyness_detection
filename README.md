@@ -143,7 +143,7 @@ A call to a single line function will return a temporary path to the captured im
 
 #### Example Video
 
-https://user-images.githubusercontent.com/106381741/210200724-ae4af9cc-ffeb-49e4-a3f9-9971b2f256b6.MP4
+https://github.com/phil10xs/livelyness_detection/blob/philip/livelynessDemo/lib/src/assets/demo/livelyness_detection.gif
 
 <a name="contributors"></a>
 
