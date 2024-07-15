@@ -136,6 +136,12 @@ A call to a single line function will return a temporary path to the captured im
     );
 ```
 
+<a name="exampleVideo"></a>
+
+#### Example Video
+
+https://github.com/phil10xs/livelyness_detection/blob/philip/livelynessDemo/lib/src/assets/demo/livelyness_detection.gif
+
 <a name="contributors"></a>
 
 ## Contributors
