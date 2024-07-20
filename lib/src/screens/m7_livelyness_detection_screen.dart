@@ -512,7 +512,9 @@ class _MLivelyness7DetectionScreenState
         Center(
           child: cameraView,
         ),
+        if(widget.config.showFacialVertices)...[
         if (_customPaint != null) _customPaint!,
+        ],
         M7LivelynessDetectionStepOverlay(
           key: _stepsKey,
           steps: _steps,
