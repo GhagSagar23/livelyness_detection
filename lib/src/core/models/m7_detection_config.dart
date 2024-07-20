@@ -15,7 +15,7 @@ class M7DetectionConfig {
   /// A boolean value that deinfes whether to allow the user to click the selfie even if the face is not detected.
   final bool allowAfterMaxSec;
 
-    /// A boolean to choose to show or not show facial vertices during detection
+  /// A boolean to choose to show or not show facial vertices during detection
   final bool showFacialVertices;
 
   /// Icon color of the button that will come after the [maxSecToDetect] is completed.
@@ -26,6 +26,7 @@ class M7DetectionConfig {
     this.startWithInfoScreen = false,
     this.maxSecToDetect = 15,
     this.allowAfterMaxSec = false,
+    this.showFacialVertices = false,
     this.captureButtonColor,
   }) {
     assert(
