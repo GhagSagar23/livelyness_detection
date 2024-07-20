@@ -407,15 +407,17 @@ class _M7LivelynessDetectionScreenAndroidState
                 ),
                 builder: (state, preview) {
                   _cameraState = state;
-                  return M7PreviewDecoratorWidget(
-                    cameraState: state,
-                    faceDetectionStream: _faceDetectionController,
-                    previewSize: PreviewSize(
-                      width: preview.previewSize.width,
-                      height: preview.previewSize.height,
-                    ),
-                    previewRect: preview.rect,
-                  );
+                  return widget.config.showFacialVertices
+                      ? M7PreviewDecoratorWidget(
+                          cameraState: state,
+                          faceDetectionStream: _faceDetectionController,
+                          previewSize: PreviewSize(
+                            width: preview.previewSize.width,
+                            height: preview.previewSize.height,
+                          ),
+                          previewRect: preview.rect,
+                        )
+                      : const SizedBox();
                 },
                 // (state, previewSize, previewRect) {
                 //   _cameraState = state;
