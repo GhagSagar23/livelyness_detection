@@ -260,7 +260,7 @@ class _M7LivelynessDetectionScreenAndroidState
         break;
       case M7LivelynessStep.turnRight:
         const double headTurnThreshold = -50.0;
-        if ((face.headEulerAngleY ?? 0) > (headTurnThreshold)) {
+        if ((face.headEulerAngleY ?? 0) < (headTurnThreshold)) {
           _startProcessing();
           await _completeStep(step: step);
         }
