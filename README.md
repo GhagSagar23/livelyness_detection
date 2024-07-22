@@ -140,12 +140,12 @@ A call to a single line function will return a temporary path to the captured im
 
 #### Example Video-Andriod
 
-https://github.com/phil10xs/livelyness_detection/blob/philip/livelynessDemo/lib/src/assets/demo/livelyness_detection_android.gif
+(https://github.com/phil10xs/livelyness_detection/blob/philip/livelynessDemo/lib/src/assets/demo/livelyness_detection_android.gif?raw=true)
 
 
 #### Example Video-iOS
 
-https://github.com/phil10xs/livelyness_detection/blob/philip/livelynessDemo/lib/src/assets/demo/livelyness_detection_ios.gif
+(https://github.com/phil10xs/livelyness_detection/blob/philip/livelynessDemo/lib/src/assets/demo/livelyness_detection_ios.gif?raw=true)
 
 <a name="contributors"></a>
 
