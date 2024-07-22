@@ -1,43 +1,45 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 import 'dart:ui' as ui;
 
 import 'package:collection/collection.dart';
 import 'package:livelyness_detection/index.dart';
-import 'package:livelyness_detection/m7_livelyness_detection.dart';
+import '../../livelyness_detection.dart';
 
 List<CameraDescription> availableCams = [];
 
-class M7LivelynessDetectionScreenV1 extends StatefulWidget {
-  final M7DetectionConfig config;
-  const M7LivelynessDetectionScreenV1({
+class LivelynessDetectionScreenV1 extends StatefulWidget {
+  final DetectionConfig config;
+  const LivelynessDetectionScreenV1({
     required this.config,
     super.key,
   });
 
   @override
-  State<M7LivelynessDetectionScreenV1> createState() =>
+  State<LivelynessDetectionScreenV1> createState() =>
       _MLivelyness7DetectionScreenState();
 }
 
 class _MLivelyness7DetectionScreenState
-    extends State<M7LivelynessDetectionScreenV1> {
+    extends State<LivelynessDetectionScreenV1> {
   //* MARK: - Private Variables
   //? =========================================================
   late bool _isInfoStepCompleted;
-  late final List<M7LivelynessStepItem> steps;
+  late final List<LivelynessStepItem> steps;
   CameraController? _cameraController;
   CustomPaint? _customPaint;
   int _cameraIndex = 0;
   bool _isBusy = false;
-  final GlobalKey<M7LivelynessDetectionStepOverlayState> _stepsKey =
-      GlobalKey<M7LivelynessDetectionStepOverlayState>();
+  final GlobalKey<LivelynessDetectionStepOverlayState> _stepsKey =
+      GlobalKey<LivelynessDetectionStepOverlayState>();
   bool _isProcessingStep = false;
   bool _didCloseEyes = false;
   bool _isTakingPicture = false;
   Timer? _timerToDetectFace;
   bool _isCaptureButtonVisible = false;
 
-  late final List<M7LivelynessStepItem> _steps;
+  late final List<LivelynessStepItem> _steps;
 
   //* MARK: - Life Cycle Methods
   //? =========================================================
@@ -206,7 +208,7 @@ class _MLivelyness7DetectionScreenState
       return;
     }
     _isBusy = true;
-    final faces = await M7MLHelper.instance.processInputImage(inputImage);
+    final faces = await MLHelper.instance.processInputImage(inputImage);
 
     if (inputImage.metadata?.size != null &&
         inputImage.metadata?.rotation != null) {
@@ -214,7 +216,7 @@ class _MLivelyness7DetectionScreenState
         _resetSteps();
       } else {
         final firstFace = faces.first;
-        final painter = M7FaceDetectorPainter(
+        final painter = FaceDetectorPainter(
           firstFace,
           inputImage.metadata!.size,
           inputImage.metadata!.rotation,
@@ -233,7 +235,7 @@ class _MLivelyness7DetectionScreenState
         );
         if (_isProcessingStep &&
             _steps[_stepsKey.currentState?.currentIndex ?? 0].step ==
-                M7LivelynessStep.blink) {
+                LivelynessStep.blink) {
           if (_didCloseEyes) {
             if ((faces.first.leftEyeOpenProbability ?? 1.0) < 0.75 &&
                 (faces.first.rightEyeOpenProbability ?? 1.0) < 0.75) {
@@ -258,7 +260,7 @@ class _MLivelyness7DetectionScreenState
   }
 
   Future<void> _completeStep({
-    required M7LivelynessStep step,
+    required LivelynessStep step,
   }) async {
     final int indexToUpdate = _steps.indexWhere(
       (p0) => p0.step == step,
@@ -311,7 +313,7 @@ class _MLivelyness7DetectionScreenState
       return;
     }
     Navigator.of(context).pop(
-      M7CapturedImage(
+      CapturedImage(
         imgPath: imgPath,
         didCaptureAutomatically: didCaptureAutomatically,
       ),
@@ -357,7 +359,7 @@ class _MLivelyness7DetectionScreenState
 
   void _detect({
     required Face face,
-    required M7LivelynessStep step,
+    required LivelynessStep step,
   }) async {
     if (_isProcessingStep) {
       return;
@@ -380,14 +382,16 @@ class _MLivelyness7DetectionScreenState
           leftEyePosition.distanceTo(
             rightEyePosition,
           ));
-      print("Golden Ratio: $goldenRatio");
+      if (kDebugMode) {
+        print("Golden Ratio: $goldenRatio");
+      }
     }
     switch (step) {
-      case M7LivelynessStep.blink:
-        final M7BlinkDetectionThreshold? blinkThreshold =
-            M7LivelynessDetection.instance.thresholdConfig.firstWhereOrNull(
-          (p0) => p0 is M7BlinkDetectionThreshold,
-        ) as M7BlinkDetectionThreshold?;
+      case LivelynessStep.blink:
+        final BlinkDetectionThreshold? blinkThreshold =
+            LivelynessDetection.instance.thresholdConfig.firstWhereOrNull(
+          (p0) => p0 is BlinkDetectionThreshold,
+        ) as BlinkDetectionThreshold?;
         if ((face.leftEyeOpenProbability ?? 1.0) <
                 (blinkThreshold?.leftEyeProbability ?? 0.25) &&
             (face.rightEyeOpenProbability ?? 1.0) <
@@ -400,33 +404,33 @@ class _MLivelyness7DetectionScreenState
           }
         }
         break;
-      case M7LivelynessStep.turnLeft:
-        final M7HeadTurnDetectionThreshold? headTurnThreshold =
-            M7LivelynessDetection.instance.thresholdConfig.firstWhereOrNull(
-          (p0) => p0 is M7HeadTurnDetectionThreshold,
-        ) as M7HeadTurnDetectionThreshold?;
+      case LivelynessStep.turnLeft:
+        final HeadTurnDetectionThreshold? headTurnThreshold =
+            LivelynessDetection.instance.thresholdConfig.firstWhereOrNull(
+          (p0) => p0 is HeadTurnDetectionThreshold,
+        ) as HeadTurnDetectionThreshold?;
         if ((face.headEulerAngleY ?? 0) >
             (headTurnThreshold?.rotationAngle ?? 45)) {
           _startProcessing();
           await _completeStep(step: step);
         }
         break;
-      case M7LivelynessStep.turnRight:
-        final M7HeadTurnDetectionThreshold? headTurnThreshold =
-            M7LivelynessDetection.instance.thresholdConfig.firstWhereOrNull(
-          (p0) => p0 is M7HeadTurnDetectionThreshold,
-        ) as M7HeadTurnDetectionThreshold?;
+      case LivelynessStep.turnRight:
+        final HeadTurnDetectionThreshold? headTurnThreshold =
+            LivelynessDetection.instance.thresholdConfig.firstWhereOrNull(
+          (p0) => p0 is HeadTurnDetectionThreshold,
+        ) as HeadTurnDetectionThreshold?;
         if ((face.headEulerAngleY ?? 0) >
             (headTurnThreshold?.rotationAngle ?? -50)) {
           _startProcessing();
           await _completeStep(step: step);
         }
         break;
-      case M7LivelynessStep.smile:
-        final M7SmileDetectionThreshold? smileThreshold =
-            M7LivelynessDetection.instance.thresholdConfig.firstWhereOrNull(
-          (p0) => p0 is M7SmileDetectionThreshold,
-        ) as M7SmileDetectionThreshold?;
+      case LivelynessStep.smile:
+        final SmileDetectionThreshold? smileThreshold =
+            LivelynessDetection.instance.thresholdConfig.firstWhereOrNull(
+          (p0) => p0 is SmileDetectionThreshold,
+        ) as SmileDetectionThreshold?;
         if ((face.smilingProbability ?? 0) >
             (smileThreshold?.probability ?? 0.75)) {
           _startProcessing();
@@ -443,7 +447,7 @@ class _MLivelyness7DetectionScreenState
       children: [
         _isInfoStepCompleted
             ? _buildDetectionBody()
-            : M7LivelynessInfoWidget(
+            : LivelynessInfoWidget(
                 onStartTap: () {
                   if (mounted) {
                     setState(
@@ -512,10 +516,10 @@ class _MLivelyness7DetectionScreenState
         Center(
           child: cameraView,
         ),
-        if(widget.config.showFacialVertices)...[
-        if (_customPaint != null) _customPaint!,
+        if (widget.config.showFacialVertices) ...[
+          if (_customPaint != null) _customPaint!,
         ],
-        M7LivelynessDetectionStepOverlay(
+        LivelynessDetectionStepOverlay(
           key: _stepsKey,
           steps: _steps,
           onCompleted: () => Future.delayed(
@@ -558,7 +562,7 @@ class _MLivelyness7DetectionScreenState
   }
 }
 
-extension M7FaceExt on Face {
+extension FaceExt on Face {
   FaceContour? getContour(FaceContourType type) {
     switch (type) {
       case FaceContourType.face:

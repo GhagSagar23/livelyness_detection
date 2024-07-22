@@ -1,18 +1,18 @@
 import 'dart:convert';
 
-class M7CapturedImage {
+class CapturedImage {
   final String imgPath;
   final bool didCaptureAutomatically;
-  M7CapturedImage({
+  CapturedImage({
     required this.imgPath,
     required this.didCaptureAutomatically,
   });
 
-  M7CapturedImage copyWith({
+  CapturedImage copyWith({
     String? imgPath,
     bool? didCaptureAutomatically,
   }) {
-    return M7CapturedImage(
+    return CapturedImage(
       imgPath: imgPath ?? this.imgPath,
       didCaptureAutomatically:
           didCaptureAutomatically ?? this.didCaptureAutomatically,
@@ -28,8 +28,8 @@ class M7CapturedImage {
     return result;
   }
 
-  factory M7CapturedImage.fromMap(Map<String, dynamic> map) {
-    return M7CapturedImage(
+  factory CapturedImage.fromMap(Map<String, dynamic> map) {
+    return CapturedImage(
       imgPath: map['imgPath'] ?? '',
       didCaptureAutomatically: map['didCaptureAutomatically'] ?? false,
     );
@@ -37,18 +37,18 @@ class M7CapturedImage {
 
   String toJson() => json.encode(toMap());
 
-  factory M7CapturedImage.fromJson(String source) =>
-      M7CapturedImage.fromMap(json.decode(source));
+  factory CapturedImage.fromJson(String source) =>
+      CapturedImage.fromMap(json.decode(source));
 
   @override
   String toString() =>
-      'M7CaptureImage(imgPath: $imgPath, didCaptureAutomatically: $didCaptureAutomatically)';
+      'CaptureImage(imgPath: $imgPath, didCaptureAutomatically: $didCaptureAutomatically)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is M7CapturedImage &&
+    return other is CapturedImage &&
         other.imgPath == imgPath &&
         other.didCaptureAutomatically == didCaptureAutomatically;
   }

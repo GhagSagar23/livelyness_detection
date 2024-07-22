@@ -1,4 +1,4 @@
-enum M7LivelynessStep {
+enum LivelynessStep {
   blink,
   turnLeft,
   turnRight,

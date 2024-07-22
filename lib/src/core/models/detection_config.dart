@@ -1,8 +1,8 @@
 import 'package:livelyness_detection/index.dart';
 
-class M7DetectionConfig {
+class DetectionConfig {
   /// Types of checks to be added while detecting the face.
-  final List<M7LivelynessStepItem> steps;
+  final List<LivelynessStepItem> steps;
 
   /// A boolean value that defines weather the detection should start with a `Info` screen or not.
   /// Default is *false*
@@ -21,7 +21,7 @@ class M7DetectionConfig {
   /// Icon color of the button that will come after the [maxSecToDetect] is completed.
   final Color? captureButtonColor;
 
-  M7DetectionConfig({
+  DetectionConfig({
     required this.steps,
     this.startWithInfoScreen = false,
     this.maxSecToDetect = 15,
@@ -32,7 +32,7 @@ class M7DetectionConfig {
     assert(
       steps.isNotEmpty,
       '''
-Cannot pass an empty array of [M7LivelynessStepItem].
+Cannot pass an empty array of [LivelynessStepItem].
       ''',
     );
   }

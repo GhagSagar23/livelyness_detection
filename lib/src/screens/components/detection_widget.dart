@@ -1,13 +1,13 @@
 import 'package:livelyness_detection/index.dart';
 
-class M7PreviewDecoratorWidget extends StatelessWidget {
+class PreviewDecoratorWidget extends StatelessWidget {
   final CameraState cameraState;
   final Stream<FaceDetectionModel> faceDetectionStream;
   final PreviewSize previewSize;
   final Rect previewRect;
   final Color? detectionColor;
 
-  const M7PreviewDecoratorWidget({
+  const PreviewDecoratorWidget({
     super.key,
     required this.cameraState,
     required this.faceDetectionStream,
@@ -30,7 +30,7 @@ class M7PreviewDecoratorWidget extends StatelessWidget {
               builder: (_, faceModelSnapshot) {
                 if (!faceModelSnapshot.hasData) return const SizedBox();
                 return CustomPaint(
-                  painter: M7AndroidFaceDetectorPainter(
+                  painter: AndroidFaceDetectorPainter(
                     model: faceModelSnapshot.requireData,
                     previewSize: previewSize,
                     previewRect: previewRect,

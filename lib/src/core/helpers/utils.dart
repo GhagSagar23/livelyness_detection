@@ -1,6 +1,6 @@
 import 'package:livelyness_detection/index.dart';
 
-class M7Utils {
+class Utils {
   static Point<int> middlePoint({
     required Point<int> from,
     required Point<int> to,

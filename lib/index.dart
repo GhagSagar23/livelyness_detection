@@ -15,6 +15,6 @@ export 'package:path_provider/path_provider.dart';
 export 'package:rxdart/rxdart.dart' hide Notification;
 export 'package:uuid/uuid.dart';
 
-export './m7_livelyness_detection_method_channel.dart';
-export './m7_livelyness_detection_platform_interface.dart';
+export 'livelyness_detection_method_channel.dart';
+export 'livelyness_detection_platform_interface.dart';
 export './src/index.dart';

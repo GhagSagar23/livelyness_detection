@@ -116,17 +116,17 @@ A call to a single line function will return a temporary path to the captured im
 
 ```dart
     final String? response =
-        await M7LivelynessDetection.instance.detectLivelyness(
+        await LivelynessDetection.instance.detectLivelyness(
       context,
-      config: M7DetectionConfig(
+      config: DetectionConfig(
         steps: [
-          M7LivelynessStepItem(
-            step: M7LivelynessStep.blink,
+          LivelynessStepItem(
+            step: LivelynessStep.blink,
             title: "Blink",
             isCompleted: false,
           ),
-          M7LivelynessStepItem(
-            step: M7LivelynessStep.smile,
+          LivelynessStepItem(
+            step: LivelynessStep.smile,
             title: "Smile",
             isCompleted: false,
           ),

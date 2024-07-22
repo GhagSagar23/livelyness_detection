@@ -1,17 +1,17 @@
 import 'package:livelyness_detection/index.dart';
 
-class M7LivelynessInfoWidget extends StatefulWidget {
+class LivelynessInfoWidget extends StatefulWidget {
   final VoidCallback onStartTap;
-  const M7LivelynessInfoWidget({
+  const LivelynessInfoWidget({
     required this.onStartTap,
     super.key,
   });
 
   @override
-  State<M7LivelynessInfoWidget> createState() => _M7LivelynessInfoWidgetState();
+  State<LivelynessInfoWidget> createState() => _LivelynessInfoWidgetState();
 }
 
-class _M7LivelynessInfoWidgetState extends State<M7LivelynessInfoWidget> {
+class _LivelynessInfoWidgetState extends State<LivelynessInfoWidget> {
   @override
   void initState() {
     super.initState();
@@ -34,7 +34,7 @@ class _M7LivelynessInfoWidgetState extends State<M7LivelynessInfoWidget> {
             flex: 2,
           ),
           Text(
-            M7StringConstants.label.livelyNessDetection,
+            StringConstants.label.livelyNessDetection,
             textAlign: TextAlign.center,
             style: const TextStyle(
               color: Colors.black,
@@ -44,7 +44,7 @@ class _M7LivelynessInfoWidgetState extends State<M7LivelynessInfoWidget> {
           ),
           const Spacer(),
           Text(
-            M7StringConstants.label.infoSubText,
+            StringConstants.label.infoSubText,
             textAlign: TextAlign.center,
             style: const TextStyle(
               color: Colors.blueGrey,
@@ -59,8 +59,8 @@ class _M7LivelynessInfoWidgetState extends State<M7LivelynessInfoWidget> {
               child: Container(
                 color: Colors.transparent,
                 child: Lottie.asset(
-                  M7AssetConstants.lottie.livelynessStart,
-                  package: M7AssetConstants.packageName,
+                  AssetConstants.lottie.livelynessStart,
+                  package: AssetConstants.packageName,
                   animate: true,
                   repeat: true,
                   reverse: false,
@@ -99,9 +99,9 @@ class _M7LivelynessInfoWidgetState extends State<M7LivelynessInfoWidget> {
                           child: Container(
                             child: _buildPointWidget(
                               index: 1,
-                              title: M7StringConstants.label.goodLighting,
+                              title: StringConstants.label.goodLighting,
                               subTitle:
-                                  M7StringConstants.label.goodLightingSubText,
+                                  StringConstants.label.goodLightingSubText,
                             ),
                           ),
                         ),
@@ -113,9 +113,8 @@ class _M7LivelynessInfoWidgetState extends State<M7LivelynessInfoWidget> {
                         child: Center(
                           child: _buildPointWidget(
                             index: 2,
-                            title: M7StringConstants.label.lookStraight,
-                            subTitle:
-                                M7StringConstants.label.lookStraightSubText,
+                            title: StringConstants.label.lookStraight,
+                            subTitle: StringConstants.label.lookStraightSubText,
                           ),
                         ),
                       ),
@@ -142,7 +141,7 @@ class _M7LivelynessInfoWidgetState extends State<M7LivelynessInfoWidget> {
                 ),
               ),
               child: Text(
-                M7StringConstants.button.start,
+                StringConstants.button.start,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontWeight: FontWeight.w500,

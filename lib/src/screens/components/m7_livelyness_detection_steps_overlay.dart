@@ -1,21 +1,21 @@
 import 'package:livelyness_detection/index.dart';
 
-class M7LivelynessDetectionStepOverlay extends StatefulWidget {
-  final List<M7LivelynessStepItem> steps;
+class LivelynessDetectionStepOverlay extends StatefulWidget {
+  final List<LivelynessStepItem> steps;
   final VoidCallback onCompleted;
-  const M7LivelynessDetectionStepOverlay({
+  const LivelynessDetectionStepOverlay({
     super.key,
     required this.steps,
     required this.onCompleted,
   });
 
   @override
-  State<M7LivelynessDetectionStepOverlay> createState() =>
-      M7LivelynessDetectionStepOverlayState();
+  State<LivelynessDetectionStepOverlay> createState() =>
+      LivelynessDetectionStepOverlayState();
 }
 
-class M7LivelynessDetectionStepOverlayState
-    extends State<M7LivelynessDetectionStepOverlay> {
+class LivelynessDetectionStepOverlayState
+    extends State<LivelynessDetectionStepOverlay> {
   //* MARK: - Public Variables
   //? =========================================================
   int get currentIndex {

@@ -1,7 +1,7 @@
 import 'package:example/index.dart';
 
 class TestScreen extends StatefulWidget {
-  final M7DetectionConfig config;
+  final DetectionConfig config;
   const TestScreen({
     required this.config,
     super.key,
@@ -57,7 +57,7 @@ class _TestScreenState extends State<TestScreen> {
   }
 
   Widget _buildInfoScreen() {
-    return M7LivelynessInfoWidget(
+    return LivelynessInfoWidget(
       onStartTap: () {},
     );
   }
