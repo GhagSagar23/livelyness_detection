@@ -1,11 +1,10 @@
 import 'dart:async';
-
 import 'package:livelyness_detection/index.dart';
 
-class M7LivelynessDetectionPageV2 extends StatelessWidget {
-  final M7DetectionConfig config;
+class LivelynessDetectionPageV2 extends StatelessWidget {
+  final DetectionConfig config;
 
-  const M7LivelynessDetectionPageV2({
+  const LivelynessDetectionPageV2({
     required this.config,
     super.key,
   });
@@ -14,7 +13,7 @@ class M7LivelynessDetectionPageV2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: M7LivelynessDetectionScreenV2(
+        child: LivelynessDetectionScreenV2(
           config: config,
         ),
       ),
@@ -22,21 +21,21 @@ class M7LivelynessDetectionPageV2 extends StatelessWidget {
   }
 }
 
-class M7LivelynessDetectionScreenV2 extends StatefulWidget {
-  final M7DetectionConfig config;
+class LivelynessDetectionScreenV2 extends StatefulWidget {
+  final DetectionConfig config;
 
-  const M7LivelynessDetectionScreenV2({
+  const LivelynessDetectionScreenV2({
     required this.config,
     super.key,
   });
 
   @override
-  State<M7LivelynessDetectionScreenV2> createState() =>
-      _M7LivelynessDetectionScreenAndroidState();
+  State<LivelynessDetectionScreenV2> createState() =>
+      _LivelynessDetectionScreenAndroidState();
 }
 
-class _M7LivelynessDetectionScreenAndroidState
-    extends State<M7LivelynessDetectionScreenV2> {
+class _LivelynessDetectionScreenAndroidState
+    extends State<LivelynessDetectionScreenV2> {
   //* MARK: - Private Variables
   //? =========================================================
   final _faceDetectionController = BehaviorSubject<FaceDetectionModel>();
@@ -53,9 +52,9 @@ class _M7LivelynessDetectionScreenAndroidState
   bool _didCloseEyes = false;
   bool _isProcessingStep = false;
 
-  late final List<M7LivelynessStepItem> _steps;
-  final GlobalKey<M7LivelynessDetectionStepOverlayState> _stepsKey =
-      GlobalKey<M7LivelynessDetectionStepOverlayState>();
+  late final List<LivelynessStepItem> _steps;
+  final GlobalKey<LivelynessDetectionStepOverlayState> _stepsKey =
+      GlobalKey<LivelynessDetectionStepOverlayState>();
 
   CameraState? _cameraState;
   bool _isProcessing = false;
@@ -195,10 +194,12 @@ class _M7LivelynessDetectionScreenAndroidState
         total += value;
       });
       final double average = total / symmetry.length;
-      print("Face Symmetry: $average");
+      if (kDebugMode) {
+        print("Face Symmetry: $average");
+      }
       if (_isProcessingStep &&
           _steps[_stepsKey.currentState?.currentIndex ?? 0].step ==
-              M7LivelynessStep.blink) {
+              LivelynessStep.blink) {
         if (_didCloseEyes) {
           if ((faces.first.leftEyeOpenProbability ?? 1.0) < 0.75 &&
               (faces.first.rightEyeOpenProbability ?? 1.0) < 0.75) {
@@ -218,7 +219,7 @@ class _M7LivelynessDetectionScreenAndroidState
   }
 
   Future<void> _completeStep({
-    required M7LivelynessStep step,
+    required LivelynessStep step,
   }) async {
     final int indexToUpdate = _steps.indexWhere(
       (p0) => p0.step == step,
@@ -236,10 +237,10 @@ class _M7LivelynessDetectionScreenAndroidState
 
   void _detect({
     required Face face,
-    required M7LivelynessStep step,
+    required LivelynessStep step,
   }) async {
     switch (step) {
-      case M7LivelynessStep.blink:
+      case LivelynessStep.blink:
         const double blinkThreshold = 0.25;
         if ((face.leftEyeOpenProbability ?? 1.0) < (blinkThreshold) &&
             (face.rightEyeOpenProbability ?? 1.0) < (blinkThreshold)) {
@@ -251,21 +252,21 @@ class _M7LivelynessDetectionScreenAndroidState
           }
         }
         break;
-      case M7LivelynessStep.turnLeft:
+      case LivelynessStep.turnLeft:
         const double headTurnThreshold = 45.0;
         if ((face.headEulerAngleY ?? 0) > (headTurnThreshold)) {
           _startProcessing();
           await _completeStep(step: step);
         }
         break;
-      case M7LivelynessStep.turnRight:
+      case LivelynessStep.turnRight:
         const double headTurnThreshold = -50.0;
         if ((face.headEulerAngleY ?? 0) < (headTurnThreshold)) {
           _startProcessing();
           await _completeStep(step: step);
         }
         break;
-      case M7LivelynessStep.smile:
+      case LivelynessStep.smile:
         const double smileThreshold = 0.75;
         if ((face.smilingProbability ?? 0) > (smileThreshold)) {
           _startProcessing();
@@ -351,7 +352,7 @@ class _M7LivelynessDetectionScreenAndroidState
       return;
     }
     Navigator.of(context).pop(
-      M7CapturedImage(
+      CapturedImage(
         imgPath: imgPath,
         didCaptureAutomatically: didCaptureAutomatically,
       ),
@@ -405,7 +406,7 @@ class _M7LivelynessDetectionScreenAndroidState
                 builder: (state, preview) {
                   _cameraState = state;
                   return widget.config.showFacialVertices
-                      ? M7PreviewDecoratorWidget(
+                      ? PreviewDecoratorWidget(
                           cameraState: state,
                           faceDetectionStream: _faceDetectionController,
                           previewSize: PreviewSize(
@@ -418,7 +419,7 @@ class _M7LivelynessDetectionScreenAndroidState
                 },
                 // (state, previewSize, previewRect) {
                 //   _cameraState = state;
-                //   return M7PreviewDecoratorWidget(
+                //   return PreviewDecoratorWidget(
                 //     cameraState: state,
                 //     faceDetectionStream: _faceDetectionController,
                 //     previewSize: previewSize,
@@ -430,7 +431,7 @@ class _M7LivelynessDetectionScreenAndroidState
                 // },
                 saveConfig: SaveConfig.photo(
                   pathBuilder: (_) async {
-                    final String fileName = "${M7Utils.generate()}.jpg";
+                    final String fileName = "${Utils.generate()}.jpg";
                     final String path = await getTemporaryDirectory().then(
                       (value) => value.path,
                     );
@@ -444,7 +445,7 @@ class _M7LivelynessDetectionScreenAndroidState
                   },
                 ),
               )
-            : M7LivelynessInfoWidget(
+            : LivelynessInfoWidget(
                 onStartTap: () {
                   if (!mounted) {
                     return;
@@ -456,7 +457,7 @@ class _M7LivelynessDetectionScreenAndroidState
                 },
               ),
         if (_isInfoStepCompleted)
-          M7LivelynessDetectionStepOverlay(
+          LivelynessDetectionStepOverlay(
             key: _stepsKey,
             steps: _steps,
             onCompleted: () => _takePicture(

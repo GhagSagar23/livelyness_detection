@@ -1,14 +1,14 @@
 import 'package:livelyness_detection/index.dart';
 
-class M7LivelynessStepItem {
+class LivelynessStepItem {
   //enum
-  final M7LivelynessStep step;
+  final LivelynessStep step;
   final String title;
   final double? thresholdToCheck;
   final bool isCompleted;
   final Color? detectionColor;
 
-  M7LivelynessStepItem({
+  LivelynessStepItem({
     required this.step,
     required this.title,
     this.thresholdToCheck,
@@ -16,14 +16,14 @@ class M7LivelynessStepItem {
     this.detectionColor,
   });
 
-  M7LivelynessStepItem copyWith({
-    M7LivelynessStep? step,
+  LivelynessStepItem copyWith({
+    LivelynessStep? step,
     String? title,
     double? thresholdToCheck,
     bool? isCompleted,
     Color? detectionColor,
   }) {
-    return M7LivelynessStepItem(
+    return LivelynessStepItem(
       step: step ?? this.step,
       title: title ?? this.title,
       thresholdToCheck: thresholdToCheck ?? this.thresholdToCheck,
@@ -48,9 +48,9 @@ class M7LivelynessStepItem {
     return result;
   }
 
-  factory M7LivelynessStepItem.fromMap(Map<String, dynamic> map) {
-    return M7LivelynessStepItem(
-      step: M7LivelynessStep.values[map['step'] ?? 0],
+  factory LivelynessStepItem.fromMap(Map<String, dynamic> map) {
+    return LivelynessStepItem(
+      step: LivelynessStep.values[map['step'] ?? 0],
       title: map['title'] ?? '',
       thresholdToCheck: map['thresholdToCheck']?.toDouble(),
       isCompleted: map['isCompleted'] ?? false,
@@ -61,19 +61,19 @@ class M7LivelynessStepItem {
 
   String toJson() => json.encode(toMap());
 
-  factory M7LivelynessStepItem.fromJson(String source) =>
-      M7LivelynessStepItem.fromMap(json.decode(source));
+  factory LivelynessStepItem.fromJson(String source) =>
+      LivelynessStepItem.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'M7LivelynessStepItem(step: $step, title: $title, thresholdToCheck: $thresholdToCheck, isCompleted: $isCompleted, detectionColor: $detectionColor)';
+    return 'LivelynessStepItem(step: $step, title: $title, thresholdToCheck: $thresholdToCheck, isCompleted: $isCompleted, detectionColor: $detectionColor)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is M7LivelynessStepItem &&
+    return other is LivelynessStepItem &&
         other.step == step &&
         other.title == title &&
         other.thresholdToCheck == thresholdToCheck &&

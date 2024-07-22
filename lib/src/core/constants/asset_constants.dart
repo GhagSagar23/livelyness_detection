@@ -1,10 +1,12 @@
-class M7AssetConstants {
+// ignore_for_file: library_private_types_in_public_api
+
+class AssetConstants {
   static const packageName = "livelyness_detection";
-  static _M7LottieAssets lottie = _M7LottieAssets();
-  static _M7ImageAssets images = _M7ImageAssets();
+  static _LottieAssets lottie = _LottieAssets();
+  static _ImageAssets images = _ImageAssets();
 }
 
-class _M7ImageAssets {
+class _ImageAssets {
   String get _initPath {
     return "src/assets";
   }
@@ -14,7 +16,7 @@ class _M7ImageAssets {
   }
 }
 
-class _M7LottieAssets {
+class _LottieAssets {
   String get _initPath {
     return "src/assets/lottie";
   }

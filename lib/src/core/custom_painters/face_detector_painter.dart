@@ -1,9 +1,9 @@
 //sky_engine/lib/ui/painting.dart
 import 'package:livelyness_detection/index.dart';
-import 'package:livelyness_detection/m7_livelyness_detection.dart';
+import 'package:livelyness_detection/livelyness_detection.dart';
 
-class M7FaceDetectorPainter extends CustomPainter {
-  M7FaceDetectorPainter(
+class FaceDetectorPainter extends CustomPainter {
+  FaceDetectorPainter(
     this.face,
     this.absoluteImageSize,
     this.rotation,
@@ -18,7 +18,7 @@ class M7FaceDetectorPainter extends CustomPainter {
     final Paint paint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.0
-      ..color = M7LivelynessDetection.instance.contourLineColor ??
+      ..color = LivelynessDetection.instance.contourLineColor ??
           const Color(0xffab48e0);
 
     void paintContour(FaceContourType type) {
@@ -30,13 +30,13 @@ class M7FaceDetectorPainter extends CustomPainter {
             final Point<int> p2 = faceContour.points[i + 1];
             canvas.drawLine(
               Offset(
-                M7MathHelper.instance.translateX(
+                MathHelper.instance.translateX(
                   p1.x.toDouble(),
                   rotation,
                   size,
                   absoluteImageSize,
                 ),
-                M7MathHelper.instance.translateY(
+                MathHelper.instance.translateY(
                   p1.y.toDouble(),
                   rotation,
                   size,
@@ -44,13 +44,13 @@ class M7FaceDetectorPainter extends CustomPainter {
                 ),
               ),
               Offset(
-                M7MathHelper.instance.translateX(
+                MathHelper.instance.translateX(
                   p2.x.toDouble(),
                   rotation,
                   size,
                   absoluteImageSize,
                 ),
-                M7MathHelper.instance.translateY(
+                MathHelper.instance.translateY(
                   p2.y.toDouble(),
                   rotation,
                   size,
@@ -64,13 +64,13 @@ class M7FaceDetectorPainter extends CustomPainter {
         for (final Point point in faceContour.points) {
           canvas.drawCircle(
             Offset(
-              M7MathHelper.instance.translateX(
+              MathHelper.instance.translateX(
                 point.x.toDouble(),
                 rotation,
                 size,
                 absoluteImageSize,
               ),
-              M7MathHelper.instance.translateY(
+              MathHelper.instance.translateY(
                 point.y.toDouble(),
                 rotation,
                 size,
@@ -102,7 +102,7 @@ class M7FaceDetectorPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(M7FaceDetectorPainter oldDelegate) {
+  bool shouldRepaint(FaceDetectorPainter oldDelegate) {
     return oldDelegate.absoluteImageSize != absoluteImageSize ||
         oldDelegate.face != face;
   }
@@ -110,8 +110,8 @@ class M7FaceDetectorPainter extends CustomPainter {
 
 //! TODO: - Kept for future release
 //? =========================================================
-// class M7MeshPainter extends CustomPainter {
-//   M7MeshPainter(
+// class MeshPainter extends CustomPainter {
+//   MeshPainter(
 //     this.face,
 //     this.absoluteImageSize,
 //     this.rotation,
@@ -139,13 +139,13 @@ class M7FaceDetectorPainter extends CustomPainter {
 //         for (final Point point in faceContour!.points) {
 //           canvas.drawCircle(
 //             Offset(
-//               M7MathHelper.instance.translateX(
+//               MathHelper.instance.translateX(
 //                 point.x.toDouble(),
 //                 rotation,
 //                 size,
 //                 absoluteImageSize,
 //               ),
-//               M7MathHelper.instance.translateY(
+//               MathHelper.instance.translateY(
 //                 point.y.toDouble(),
 //                 rotation,
 //                 size,
@@ -167,13 +167,13 @@ class M7FaceDetectorPainter extends CustomPainter {
 //     }) {
 //       canvas.drawLine(
 //         Offset(
-//           M7MathHelper.instance.translateX(
+//           MathHelper.instance.translateX(
 //             px.toDouble(),
 //             rotation,
 //             size,
 //             absoluteImageSize,
 //           ),
-//           M7MathHelper.instance.translateY(
+//           MathHelper.instance.translateY(
 //             py.toDouble(),
 //             rotation,
 //             size,
@@ -181,13 +181,13 @@ class M7FaceDetectorPainter extends CustomPainter {
 //           ),
 //         ),
 //         Offset(
-//           M7MathHelper.instance.translateX(
+//           MathHelper.instance.translateX(
 //             qx.toDouble(),
 //             rotation,
 //             size,
 //             absoluteImageSize,
 //           ),
-//           M7MathHelper.instance.translateY(
+//           MathHelper.instance.translateY(
 //             qy.toDouble(),
 //             rotation,
 //             size,
@@ -278,7 +278,7 @@ class M7FaceDetectorPainter extends CustomPainter {
 //           .last;
 
 //       for (var i = 0; i < rightEyeBottom.length; i++) {
-//         final p0 = M7Utils.middlePoint(
+//         final p0 = Utils.middlePoint(
 //           from: rightEyeBottom[i],
 //           to: bottomRightFaceEdges[i],
 //         );
@@ -303,7 +303,7 @@ class M7FaceDetectorPainter extends CustomPainter {
 //   }
 
 //   @override
-//   bool shouldRepaint(M7MeshPainter oldDelegate) {
+//   bool shouldRepaint(MeshPainter oldDelegate) {
 //     return oldDelegate.absoluteImageSize != absoluteImageSize ||
 //         oldDelegate.face != face;
 //   }

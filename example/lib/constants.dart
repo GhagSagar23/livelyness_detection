@@ -73,6 +73,7 @@ ColorScheme _getCustomColorScheme() {
     primary: AppColors.primary,
     onPrimary: AppColors.primary,
     onError: AppColors.onError,
+    // ignore: deprecated_member_use
     background: AppColors.primary,
     secondary: AppColors.secondary,
     onSecondary: AppColors.onSecondary,

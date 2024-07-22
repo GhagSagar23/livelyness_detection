@@ -1,23 +1,23 @@
 import 'package:collection/collection.dart';
 import 'package:example/index.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:livelyness_detection/m7_livelyness_detection.dart';
+import 'package:livelyness_detection/livelyness_detection.dart';
 
-class M7ExpampleScreen extends StatefulWidget {
-  const M7ExpampleScreen({super.key});
+class ExampleScreen extends StatefulWidget {
+  const ExampleScreen({super.key});
 
   @override
-  State<M7ExpampleScreen> createState() => _M7ExpampleScreenState();
+  State<ExampleScreen> createState() => _ExampleScreenState();
 }
 
-class _M7ExpampleScreenState extends State<M7ExpampleScreen> {
+class _ExampleScreenState extends State<ExampleScreen> {
   //* MARK: - Private Variables
   //? =========================================================
   String? _capturedImagePath;
   final bool _isLoading = false;
   bool _startWithInfo = true;
   bool _allowAfterTimeOut = false;
-  final List<M7LivelynessStepItem> _veificationSteps = [];
+  final List<LivelynessStepItem> _veificationSteps = [];
   int _timeOutDuration = 30;
 
   //* MARK: - Life Cycle Methods
@@ -41,21 +41,21 @@ class _M7ExpampleScreenState extends State<M7ExpampleScreen> {
   void _initValues() {
     _veificationSteps.addAll(
       [
-        M7LivelynessStepItem(
-          step: M7LivelynessStep.blink,
+        LivelynessStepItem(
+          step: LivelynessStep.blink,
           title: "Blink",
           isCompleted: false,
           detectionColor: Colors.amber,
         ),
-        M7LivelynessStepItem(
-          step: M7LivelynessStep.smile,
+        LivelynessStepItem(
+          step: LivelynessStep.smile,
           title: "Smile",
           isCompleted: false,
           detectionColor: Colors.green.shade800,
         ),
       ],
     );
-    M7LivelynessDetection.instance.configure(
+    LivelynessDetection.instance.configure(
       lineColor: Colors.white,
       dotColor: Colors.purple.shade800,
       dotSize: 2.0,
@@ -64,10 +64,10 @@ class _M7ExpampleScreenState extends State<M7ExpampleScreen> {
       displayDots: false,
       displayLines: true,
       thresholds: [
-        M7SmileDetectionThreshold(
+        SmileDetectionThreshold(
           probability: 0.8,
         ),
-        M7BlinkDetectionThreshold(
+        BlinkDetectionThreshold(
           leftEyeProbability: 0.25,
           rightEyeProbability: 0.25,
         ),
@@ -77,10 +77,10 @@ class _M7ExpampleScreenState extends State<M7ExpampleScreen> {
 
   void _onStartLivelyness() async {
     setState(() => _capturedImagePath = null);
-    final M7CapturedImage? response =
-        await M7LivelynessDetection.instance.detectLivelyness(
+    final CapturedImage? response =
+        await LivelynessDetection.instance.detectLivelyness(
       context,
-      config: M7DetectionConfig(
+      config: DetectionConfig(
         steps: _veificationSteps,
         startWithInfoScreen: _startWithInfo,
         maxSecToDetect: _timeOutDuration == 100 ? 2500 : _timeOutDuration,
@@ -96,40 +96,40 @@ class _M7ExpampleScreenState extends State<M7ExpampleScreen> {
     );
   }
 
-  String _getTitle(M7LivelynessStep step) {
+  String _getTitle(LivelynessStep step) {
     switch (step) {
-      case M7LivelynessStep.blink:
+      case LivelynessStep.blink:
         return "Blink";
-      case M7LivelynessStep.turnLeft:
+      case LivelynessStep.turnLeft:
         return "Turn Your Head Left";
-      case M7LivelynessStep.turnRight:
+      case LivelynessStep.turnRight:
         return "Turn Your Head Right";
-      case M7LivelynessStep.smile:
+      case LivelynessStep.smile:
         return "Smile";
     }
   }
 
-  String _getSubTitle(M7LivelynessStep step) {
+  String _getSubTitle(LivelynessStep step) {
     switch (step) {
-      case M7LivelynessStep.blink:
+      case LivelynessStep.blink:
         return "Detects Blink on the face visible in camera";
-      case M7LivelynessStep.turnLeft:
+      case LivelynessStep.turnLeft:
         return "Detects Left Turn of the on the face visible in camera";
-      case M7LivelynessStep.turnRight:
+      case LivelynessStep.turnRight:
         return "Detects Right Turn of the on the face visible in camera";
-      case M7LivelynessStep.smile:
+      case LivelynessStep.smile:
         return "Detects Smile on the face visible in camera";
     }
   }
 
-  bool _isSelected(M7LivelynessStep step) {
-    final M7LivelynessStepItem? doesExist = _veificationSteps.firstWhereOrNull(
+  bool _isSelected(LivelynessStep step) {
+    final LivelynessStepItem? doesExist = _veificationSteps.firstWhereOrNull(
       (p0) => p0.step == step,
     );
     return doesExist != null;
   }
 
-  void _onStepValChanged(M7LivelynessStep step, bool value) {
+  void _onStepValChanged(LivelynessStep step, bool value) {
     if (!value && _veificationSteps.length == 1) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -145,13 +145,13 @@ class _M7ExpampleScreenState extends State<M7ExpampleScreen> {
       );
       return;
     }
-    final M7LivelynessStepItem? doesExist = _veificationSteps.firstWhereOrNull(
+    final LivelynessStepItem? doesExist = _veificationSteps.firstWhereOrNull(
       (p0) => p0.step == step,
     );
 
     if (doesExist == null && value) {
       _veificationSteps.add(
-        M7LivelynessStepItem(
+        LivelynessStepItem(
           step: step,
           title: _getTitle(step),
           isCompleted: false,
@@ -172,7 +172,7 @@ class _M7ExpampleScreenState extends State<M7ExpampleScreen> {
   AppBar _buildAppBar() {
     return AppBar(
       title: const Text(
-        "M7 Livelyness Detection",
+        " Livelyness Detection",
       ),
     );
   }
@@ -310,11 +310,11 @@ class _M7ExpampleScreenState extends State<M7ExpampleScreen> {
           flex: 14,
           child: ListView.builder(
             physics: const ClampingScrollPhysics(),
-            itemCount: M7LivelynessStep.values.length,
+            itemCount: LivelynessStep.values.length,
             itemBuilder: (context, index) => ExpansionTile(
               title: Text(
                 _getTitle(
-                  M7LivelynessStep.values[index],
+                  LivelynessStep.values[index],
                 ),
                 style: const TextStyle(
                   fontSize: 18,
@@ -325,7 +325,7 @@ class _M7ExpampleScreenState extends State<M7ExpampleScreen> {
                 ListTile(
                   title: Text(
                     _getSubTitle(
-                      M7LivelynessStep.values[index],
+                      LivelynessStep.values[index],
                     ),
                     style: const TextStyle(
                       fontSize: 16,
@@ -334,10 +334,10 @@ class _M7ExpampleScreenState extends State<M7ExpampleScreen> {
                   ),
                   trailing: CupertinoSwitch(
                     value: _isSelected(
-                      M7LivelynessStep.values[index],
+                      LivelynessStep.values[index],
                     ),
                     onChanged: (value) => _onStepValChanged(
-                      M7LivelynessStep.values[index],
+                      LivelynessStep.values[index],
                       value,
                     ),
                   ),

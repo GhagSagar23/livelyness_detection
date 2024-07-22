@@ -1,10 +1,10 @@
 import 'package:livelyness_detection/index.dart';
 
-class M7MLHelper {
+class MLHelper {
   //* MARK: - Converting class to Singleton
   //? =========================================================
-  M7MLHelper._privateConstructor();
-  static final M7MLHelper instance = M7MLHelper._privateConstructor();
+  MLHelper._privateConstructor();
+  static final MLHelper instance = MLHelper._privateConstructor();
 
   //* MARK: - Public Variables
   //? =========================================================

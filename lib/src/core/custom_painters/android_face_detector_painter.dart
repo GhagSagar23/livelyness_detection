@@ -2,9 +2,9 @@ import 'dart:math' as math;
 import 'dart:ui' as ui;
 
 import 'package:livelyness_detection/index.dart';
-import 'package:livelyness_detection/m7_livelyness_detection.dart';
+import 'package:livelyness_detection/livelyness_detection.dart';
 
-class M7AndroidFaceDetectorPainter extends CustomPainter {
+class AndroidFaceDetectorPainter extends CustomPainter {
   final FaceDetectionModel model;
   final PreviewSize previewSize;
   final Rect previewRect;
@@ -12,7 +12,7 @@ class M7AndroidFaceDetectorPainter extends CustomPainter {
   final Color? detectionColor;
   late DashedPathProperties _dashedPathProperties;
 
-  M7AndroidFaceDetectorPainter({
+  AndroidFaceDetectorPainter({
     required this.model,
     required this.previewSize,
     required this.previewRect,
@@ -95,7 +95,7 @@ class M7AndroidFaceDetectorPainter extends CustomPainter {
                   )
                   .toList(),
               true);
-          if (M7LivelynessDetection.instance.displayDots) {
+          if (LivelynessDetection.instance.displayDots) {
             for (var element in faceContour.points) {
               canvas.drawCircle(
                 _croppedPosition(
@@ -108,33 +108,33 @@ class M7AndroidFaceDetectorPainter extends CustomPainter {
                 4,
                 Paint()
                   ..color = detectionColor ??
-                      M7LivelynessDetection.instance.contourDotColor ??
+                      LivelynessDetection.instance.contourDotColor ??
                       Colors.purple.shade800
                   ..strokeWidth =
-                      M7LivelynessDetection.instance.contourDotRadius ?? 2,
+                      LivelynessDetection.instance.contourDotRadius ?? 2,
               );
             }
           }
         }
       });
       paths.removeWhere((key, value) => value.getBounds().isEmpty);
-      if (M7LivelynessDetection.instance.displayLines) {
+      if (LivelynessDetection.instance.displayLines) {
         for (var p in paths.entries) {
-          final Path finalPath = M7LivelynessDetection.instance.displayDash
+          final Path finalPath = LivelynessDetection.instance.displayDash
               ? _getDashedPath(
                   p.value,
-                  M7LivelynessDetection.instance.dashLength,
-                  M7LivelynessDetection.instance.dashGap,
+                  LivelynessDetection.instance.dashLength,
+                  LivelynessDetection.instance.dashGap,
                 )
               : p.value;
           canvas.drawPath(
             finalPath,
             Paint()
               ..color = detectionColor ??
-                  M7LivelynessDetection.instance.contourLineColor ??
+                  LivelynessDetection.instance.contourLineColor ??
                   Colors.white
               ..strokeWidth =
-                  M7LivelynessDetection.instance.contourLineWidth ?? 1.6
+                  LivelynessDetection.instance.contourLineWidth ?? 1.6
               ..style = PaintingStyle.stroke,
           );
         }
@@ -143,7 +143,7 @@ class M7AndroidFaceDetectorPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(M7AndroidFaceDetectorPainter oldDelegate) {
+  bool shouldRepaint(AndroidFaceDetectorPainter oldDelegate) {
     return oldDelegate.isBackCamera != isBackCamera ||
         oldDelegate.previewSize.width != previewSize.width ||
         oldDelegate.previewSize.height != previewSize.height ||

@@ -1,18 +1,17 @@
 import 'package:livelyness_detection/index.dart';
-
 export './src/index.dart';
 
-class M7LivelynessDetection {
+class LivelynessDetection {
   //* MARK: - Converting Package to Singleton
   //? =========================================================
-  M7LivelynessDetection._privateConstructor();
+  LivelynessDetection._privateConstructor();
 
-  static final M7LivelynessDetection instance =
-      M7LivelynessDetection._privateConstructor();
+  static final LivelynessDetection instance =
+      LivelynessDetection._privateConstructor();
 
   //* MARK: - Private Variables
   //? =========================================================
-  final List<M7DetectionThreshold> _thresholds = [];
+  final List<DetectionThreshold> _thresholds = [];
   Color? _contourLineColor;
   Color? _contourDotColor;
   double? _contourDotRadius;
@@ -25,7 +24,7 @@ class M7LivelynessDetection {
 
   //* MARK: - Public Variables
   //? =========================================================
-  List<M7DetectionThreshold> get thresholdConfig {
+  List<DetectionThreshold> get thresholdConfig {
     return _thresholds;
   }
 
@@ -75,19 +74,19 @@ class M7LivelynessDetection {
   /// A single line functoin to detect weather the face is live or not.
   /// Parameters: -
   /// * context: - Positional Parameter that will accept a `BuildContext` using which it will redirect the a new screen.
-  /// * config: - Accepts a `M7DetectionConfig` object which will hold all the setup config of the package.
-  Future<M7CapturedImage?> detectLivelyness(
+  /// * config: - Accepts a `DetectionConfig` object which will hold all the setup config of the package.
+  Future<CapturedImage?> detectLivelyness(
     BuildContext context, {
-    required M7DetectionConfig config,
+    required DetectionConfig config,
   }) async {
     _safeAreaPadding = MediaQuery.of(context).padding;
-    final M7CapturedImage? capturedFacePath = await Navigator.of(context).push(
+    final CapturedImage? capturedFacePath = await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => Platform.isIOS
-            ? M7LivelynessDetectionScreenV1(
+            ? LivelynessDetectionScreenV1(
                 config: config,
               )
-            : M7LivelynessDetectionPageV2(
+            : LivelynessDetectionPageV2(
                 config: config,
               ),
       ),
@@ -97,10 +96,10 @@ class M7LivelynessDetection {
 
   /// Configures the shreshold values of which will be used while verfying
   /// Parameters: -
-  /// * thresholds: - List of [M7DetectionThreshold] objects.
+  /// * thresholds: - List of [DetectionThreshold] objects.
   /// * contourColor - Color of the points that are plotted on the face while detecting.
   void configure({
-    required List<M7DetectionThreshold> thresholds,
+    required List<DetectionThreshold> thresholds,
     Color lineColor = const Color(0xffab48e0),
     Color dotColor = const Color(0xffab48e0),
     double lineWidth = 1.6,

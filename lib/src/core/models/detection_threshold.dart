@@ -1,9 +1,9 @@
 import 'package:livelyness_detection/index.dart';
 
 /// Configures the threshold values that will be used while verifying each step.
-abstract class M7DetectionThreshold extends Equatable {
-  const M7DetectionThreshold();
-  M7DetectionThreshold fromDict(Map<String, dynamic> map);
+abstract class DetectionThreshold extends Equatable {
+  const DetectionThreshold();
+  DetectionThreshold fromDict(Map<String, dynamic> map);
 
   Map<String, dynamic> toMap();
   @override
@@ -11,12 +11,12 @@ abstract class M7DetectionThreshold extends Equatable {
 }
 
 /// Configure Smile threshold that will be used while verifying smile.
-class M7SmileDetectionThreshold extends M7DetectionThreshold {
+class SmileDetectionThreshold extends DetectionThreshold {
   /// Threshold of a smile when the step should be considered as verified
   /// Default Value: `0.75`
   final double probability;
 
-  M7SmileDetectionThreshold({
+  SmileDetectionThreshold({
     this.probability = 0.75,
   }) : super() {
     assert(
@@ -25,10 +25,10 @@ class M7SmileDetectionThreshold extends M7DetectionThreshold {
     );
   }
 
-  M7SmileDetectionThreshold copyWith({
+  SmileDetectionThreshold copyWith({
     double? probability,
   }) {
-    return M7SmileDetectionThreshold(
+    return SmileDetectionThreshold(
       probability: probability ?? this.probability,
     );
   }
@@ -43,41 +43,40 @@ class M7SmileDetectionThreshold extends M7DetectionThreshold {
   }
 
   @override
-  factory M7SmileDetectionThreshold.fromMap(Map<String, dynamic> map) {
-    return M7SmileDetectionThreshold(
+  factory SmileDetectionThreshold.fromMap(Map<String, dynamic> map) {
+    return SmileDetectionThreshold(
       probability: map['probability']?.toDouble() ?? 0.0,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory M7SmileDetectionThreshold.fromJson(String source) =>
-      M7SmileDetectionThreshold.fromMap(json.decode(source));
+  factory SmileDetectionThreshold.fromJson(String source) =>
+      SmileDetectionThreshold.fromMap(json.decode(source));
 
   @override
-  String toString() => 'M7SmileDetectionThreshold(probability: $probability)';
+  String toString() => 'SmileDetectionThreshold(probability: $probability)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is M7SmileDetectionThreshold &&
-        other.probability == probability;
+    return other is SmileDetectionThreshold && other.probability == probability;
   }
 
   @override
   int get hashCode => probability.hashCode;
 
   @override
-  M7DetectionThreshold fromDict(Map<String, dynamic> map) {
-    return M7SmileDetectionThreshold(
+  DetectionThreshold fromDict(Map<String, dynamic> map) {
+    return SmileDetectionThreshold(
       probability: map['probability']?.toDouble() ?? 0.0,
     );
   }
 }
 
 /// Configure Blink threshold that will be used while verifying blink.
-class M7BlinkDetectionThreshold extends M7DetectionThreshold {
+class BlinkDetectionThreshold extends DetectionThreshold {
   /// Threshold to specify at which the __left__ eye's blink verification is considered as verified.
   /// To get precise results pass the value close to `0`, e.g. `0.2`
   /// To relax the precision pass the value towards `1`, e.g. `0.5`
@@ -90,7 +89,7 @@ class M7BlinkDetectionThreshold extends M7DetectionThreshold {
   /// Default Value: `0.25`
   final double rightEyeProbability;
 
-  M7BlinkDetectionThreshold({
+  BlinkDetectionThreshold({
     this.leftEyeProbability = 0.25,
     this.rightEyeProbability = 0.25,
   }) : super() {
@@ -104,11 +103,11 @@ class M7BlinkDetectionThreshold extends M7DetectionThreshold {
     );
   }
 
-  M7BlinkDetectionThreshold copyWith({
+  BlinkDetectionThreshold copyWith({
     double? leftEyeProbability,
     double? rightEyeProbability,
   }) {
-    return M7BlinkDetectionThreshold(
+    return BlinkDetectionThreshold(
       leftEyeProbability: leftEyeProbability ?? this.leftEyeProbability,
       rightEyeProbability: rightEyeProbability ?? this.rightEyeProbability,
     );
@@ -124,8 +123,8 @@ class M7BlinkDetectionThreshold extends M7DetectionThreshold {
     return result;
   }
 
-  factory M7BlinkDetectionThreshold.fromMap(Map<String, dynamic> map) {
-    return M7BlinkDetectionThreshold(
+  factory BlinkDetectionThreshold.fromMap(Map<String, dynamic> map) {
+    return BlinkDetectionThreshold(
       leftEyeProbability: map['leftEyeProbability']?.toDouble() ?? 0.0,
       rightEyeProbability: map['rightEyeProbability']?.toDouble() ?? 0.0,
     );
@@ -133,18 +132,18 @@ class M7BlinkDetectionThreshold extends M7DetectionThreshold {
 
   String toJson() => json.encode(toMap());
 
-  factory M7BlinkDetectionThreshold.fromJson(String source) =>
-      M7BlinkDetectionThreshold.fromMap(json.decode(source));
+  factory BlinkDetectionThreshold.fromJson(String source) =>
+      BlinkDetectionThreshold.fromMap(json.decode(source));
 
   @override
   String toString() =>
-      'M7BlinkDetectionThreshold(leftEyeProbability: $leftEyeProbability, rightEyeProbability: $rightEyeProbability)';
+      'BlinkDetectionThreshold(leftEyeProbability: $leftEyeProbability, rightEyeProbability: $rightEyeProbability)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is M7BlinkDetectionThreshold &&
+    return other is BlinkDetectionThreshold &&
         other.leftEyeProbability == leftEyeProbability &&
         other.rightEyeProbability == rightEyeProbability;
   }
@@ -154,8 +153,8 @@ class M7BlinkDetectionThreshold extends M7DetectionThreshold {
       leftEyeProbability.hashCode ^ rightEyeProbability.hashCode;
 
   @override
-  M7DetectionThreshold fromDict(Map<String, dynamic> map) {
-    return M7BlinkDetectionThreshold(
+  DetectionThreshold fromDict(Map<String, dynamic> map) {
+    return BlinkDetectionThreshold(
       leftEyeProbability: map['leftEyeProbability']?.toDouble() ?? 0.0,
       rightEyeProbability: map['rightEyeProbability']?.toDouble() ?? 0.0,
     );
@@ -163,14 +162,14 @@ class M7BlinkDetectionThreshold extends M7DetectionThreshold {
 }
 
 /// Configure the Head Turn threshold that will be used while verifying head turn towards left/right.
-class M7HeadTurnDetectionThreshold extends M7DetectionThreshold {
+class HeadTurnDetectionThreshold extends DetectionThreshold {
   /// Threshold of head angle at which the head turn will be considered as verified
   /// A `Positive` Value will be considered as detection on the `Left` size and
   /// A `Negative` Value will be considered as detection on the `Right` size.
   /// Default Value: `45`, i.e., the head turn will be checked on the `Left Side`
   final double rotationAngle;
 
-  M7HeadTurnDetectionThreshold({
+  HeadTurnDetectionThreshold({
     this.rotationAngle = 45.0,
   }) : super() {
     assert(
@@ -179,10 +178,10 @@ class M7HeadTurnDetectionThreshold extends M7DetectionThreshold {
     );
   }
 
-  M7HeadTurnDetectionThreshold copyWith({
+  HeadTurnDetectionThreshold copyWith({
     double? rotationAngle,
   }) {
-    return M7HeadTurnDetectionThreshold(
+    return HeadTurnDetectionThreshold(
       rotationAngle: rotationAngle ?? this.rotationAngle,
     );
   }
@@ -196,26 +195,26 @@ class M7HeadTurnDetectionThreshold extends M7DetectionThreshold {
     return result;
   }
 
-  factory M7HeadTurnDetectionThreshold.fromMap(Map<String, dynamic> map) {
-    return M7HeadTurnDetectionThreshold(
+  factory HeadTurnDetectionThreshold.fromMap(Map<String, dynamic> map) {
+    return HeadTurnDetectionThreshold(
       rotationAngle: map['rotationAngle']?.toDouble() ?? 0.0,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory M7HeadTurnDetectionThreshold.fromJson(String source) =>
-      M7HeadTurnDetectionThreshold.fromMap(json.decode(source));
+  factory HeadTurnDetectionThreshold.fromJson(String source) =>
+      HeadTurnDetectionThreshold.fromMap(json.decode(source));
 
   @override
   String toString() =>
-      'M7HeadTurnDetectionThreshold(rotationAngle: $rotationAngle)';
+      'HeadTurnDetectionThreshold(rotationAngle: $rotationAngle)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is M7HeadTurnDetectionThreshold &&
+    return other is HeadTurnDetectionThreshold &&
         other.rotationAngle == rotationAngle;
   }
 
@@ -223,8 +222,8 @@ class M7HeadTurnDetectionThreshold extends M7DetectionThreshold {
   int get hashCode => rotationAngle.hashCode;
 
   @override
-  M7DetectionThreshold fromDict(Map<String, dynamic> map) {
-    return M7HeadTurnDetectionThreshold(
+  DetectionThreshold fromDict(Map<String, dynamic> map) {
+    return HeadTurnDetectionThreshold(
       rotationAngle: map['rotationAngle']?.toDouble() ?? 0.0,
     );
   }

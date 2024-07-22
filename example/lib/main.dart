@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: appTheme,
-      home: const M7ExpampleScreen(),
+      home: const ExampleScreen(),
     );
   }
 }
