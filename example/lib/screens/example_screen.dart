@@ -16,6 +16,7 @@ class _ExampleScreenState extends State<ExampleScreen> {
   String? _capturedImagePath;
   final bool _isLoading = false;
   bool _startWithInfo = true;
+  bool _showFacialVertices = false;
   bool _allowAfterTimeOut = false;
   final List<LivelynessStepItem> _veificationSteps = [];
   int _timeOutDuration = 30;
@@ -83,6 +84,7 @@ class _ExampleScreenState extends State<ExampleScreen> {
       config: DetectionConfig(
         steps: _veificationSteps,
         startWithInfoScreen: _startWithInfo,
+        showFacialVertices: _showFacialVertices,
         maxSecToDetect: _timeOutDuration == 100 ? 2500 : _timeOutDuration,
         allowAfterMaxSec: _allowAfterTimeOut,
         captureButtonColor: Colors.red,
@@ -254,6 +256,34 @@ class _ExampleScreenState extends State<ExampleScreen> {
               value: _startWithInfo,
               onChanged: (value) => setState(
                 () => _startWithInfo = value,
+              ),
+            ),
+            const Spacer(
+              flex: 3,
+            ),
+          ],
+        ),
+        const Spacer(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Spacer(
+              flex: 3,
+            ),
+            const Text(
+              "Show facial vertices:",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const Spacer(),
+            CupertinoSwitch(
+              value: _showFacialVertices,
+              onChanged: (value) => setState(
+                () => _showFacialVertices = value,
               ),
             ),
             const Spacer(

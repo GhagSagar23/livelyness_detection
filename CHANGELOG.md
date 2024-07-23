@@ -1,7 +1,11 @@
-## 0.0.1+3
-
+## 0.0.1+4
 - Updates:
+- Renamed classes
+- Re-do gif demo
+- Added show facial vertices to example app
 
+## 0.0.1+3
+- Updates:
   - Updated README.md
   - Added `SECURITY.md` to report security vulnerabilities
   - Added `CODE_OF_CONDUCT.md` to maintain a healthy community
