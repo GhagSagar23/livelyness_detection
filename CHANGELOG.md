@@ -2,6 +2,7 @@
 - Updates:
 - Renamed classes
 - Re-do gif demo
+- Added show facial vertices to example app
 
 ## 0.0.1+3
 - Updates:
