@@ -11,8 +11,8 @@ class LivelynessStepItem {
   LivelynessStepItem({
     required this.step,
     required this.title,
-    this.thresholdToCheck,
     required this.isCompleted,
+    this.thresholdToCheck,
     this.detectionColor,
   });
 

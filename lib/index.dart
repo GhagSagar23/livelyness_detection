@@ -12,9 +12,9 @@ export 'package:flutter/material.dart';
 export 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 export 'package:lottie/lottie.dart';
 export 'package:path_provider/path_provider.dart';
-export 'package:rxdart/rxdart.dart' hide Notification;
+export 'package:rxdart/rxdart.dart';
 export 'package:uuid/uuid.dart';
 
+export './src/index.dart';
 export 'livelyness_detection_method_channel.dart';
 export 'livelyness_detection_platform_interface.dart';
-export './src/index.dart';
