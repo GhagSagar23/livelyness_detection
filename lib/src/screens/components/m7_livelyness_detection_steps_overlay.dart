@@ -121,8 +121,33 @@ class LivelynessDetectionStepOverlayState
               itemCount: widget.steps.length,
               itemBuilder: (context, index) {
                 return _buildAnimatedWidget(
-                  const Padding(
-                    padding: EdgeInsets.all(10),
+                  Padding(
+                    padding: const EdgeInsets.all(30),
+                    // child: Container(
+                    //   decoration: BoxDecoration(
+                    //     color: Colors.white,
+                    //     borderRadius: BorderRadius.circular(20),
+                    //     boxShadow: const [
+                    //       BoxShadow(
+                    //         blurRadius: 5,
+                    //         spreadRadius: 2.5,
+                    //         color: Colors.black12,
+                    //       ),
+                    //     ],
+                    //   ),
+                    //   alignment: Alignment.center,
+                    //   margin: const EdgeInsets.symmetric(horizontal: 60),
+                    //   // padding: const EdgeInsets.all(20),
+                    //   child: Text(
+                    //     widget.steps[index].title + " to take photo",
+                    //     textAlign: TextAlign.center,
+                    //     style: const TextStyle(
+                    //       color: Colors.black,
+                    //       fontSize: 12,
+                    //       fontWeight: FontWeight.bold,
+                    //     ),
+                    //   ),
+                    // ),
                   ),
                   isExiting: index != _currentIndex,
                 );
