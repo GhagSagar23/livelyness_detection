@@ -415,7 +415,7 @@ class _LivelynessDetectionScreenAndroidState
                 previewFit: CameraPreviewFit.contain,
                 // aspectRatio: CameraAspectRatios.ratio_16_9,
                 sensorConfig: SensorConfig.single(
-                  aspectRatio: CameraAspectRatios.ratio_4_3,
+                  aspectRatio: CameraAspectRatios.ratio_16_9,
                   flashMode: FlashMode.always,
                   sensor: Sensor.position(SensorPosition.front),
                 ),
