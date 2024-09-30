@@ -13,28 +13,8 @@ class LivelynessDetectionPageV2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        minimum: EdgeInsets.symmetric(horizontal: 30, vertical: 100),
-        child: Container(
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color:
-                    Colors.grey.withOpacity(0.5), // Shadow color with opacity
-                spreadRadius: 5, // Spread of the shadow
-                blurRadius: 7, // Blur radius for softness of shadow
-                offset: Offset(0, 3), // Positioning of the shadow (x, y)
-              ),
-            ],
-            color: Colors.transparent,
-            borderRadius: BorderRadius.circular(20), // Apply circular radius
-            border: Border.all(
-              color: Colors.white,
-              width: 15,
-            ),
-          ),
-          child: LivelynessDetectionScreenV2(
-            config: config,
-          ),
+        child: LivelynessDetectionScreenV2(
+          config: config,
         ),
       ),
     );
@@ -508,7 +488,6 @@ class _LivelynessDetectionScreenAndroidState
                   size: 24,
                 ),
               ),
-            
             ],
           ),
         ),
