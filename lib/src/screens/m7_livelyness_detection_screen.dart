@@ -63,6 +63,21 @@ class _MLivelyness7DetectionScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.close_rounded,
+              color: Colors.black,
+            )),
+        title: const Text(
+          "Blink to take photo",
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
       body: SafeArea(
         child: _buildBody(),
       ),
@@ -457,30 +472,30 @@ class _MLivelyness7DetectionScreenState
                   _startLiveFeed();
                 },
               ),
-        Align(
-          alignment: Alignment.topRight,
-          child: Padding(
-            padding: const EdgeInsets.only(
-              right: 10,
-              top: 10,
-            ),
-            child: CircleAvatar(
-              radius: 20,
-              backgroundColor: Colors.black,
-              child: IconButton(
-                onPressed: () => _onDetectionCompleted(
-                  imgToReturn: null,
-                  didCaptureAutomatically: null,
-                ),
-                icon: const Icon(
-                  Icons.close_rounded,
-                  size: 20,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-        ),
+        // Align(
+        //   alignment: Alignment.topRight,
+        //   child: Padding(
+        //     padding: const EdgeInsets.only(
+        //       right: 10,
+        //       top: 10,
+        //     ),
+        //     child: CircleAvatar(
+        //       radius: 20,
+        //       backgroundColor: Colors.black,
+        //       child: IconButton(
+        //         onPressed: () => _onDetectionCompleted(
+        //           imgToReturn: null,
+        //           didCaptureAutomatically: null,
+        //         ),
+        //         icon: const Icon(
+        //           Icons.close_rounded,
+        //           size: 20,
+        //           color: Colors.white,
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
