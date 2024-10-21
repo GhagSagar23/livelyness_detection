@@ -112,36 +112,6 @@ class LivelynessDetectionStepOverlayState
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(
-          height: 10,
-          width: double.infinity,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Expanded(
-                flex: _currentIndex + 1,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(20),
-                      bottomRight: Radius.circular(20),
-                    ),
-                    color: Colors.green.shade800,
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: widget.steps.length - (_currentIndex + 1),
-                child: Container(
-                  color: Colors.transparent,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const Spacer(),
         Flexible(
           flex: 2,
           child: AbsorbPointer(
@@ -152,32 +122,32 @@ class LivelynessDetectionStepOverlayState
               itemBuilder: (context, index) {
                 return _buildAnimatedWidget(
                   Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: const [
-                          BoxShadow(
-                            blurRadius: 5,
-                            spreadRadius: 2.5,
-                            color: Colors.black12,
-                          ),
-                        ],
-                      ),
-                      alignment: Alignment.center,
-                      margin: const EdgeInsets.symmetric(horizontal: 30),
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        widget.steps[index].title,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+                    padding: const EdgeInsets.all(0),
+                    // child: Container(
+                    //   decoration: BoxDecoration(
+                    //     color: Colors.white,
+                    //     borderRadius: BorderRadius.circular(20),
+                    //     boxShadow: const [
+                    //       BoxShadow(
+                    //         blurRadius: 5,
+                    //         spreadRadius: 2.5,
+                    //         color: Colors.black12,
+                    //       ),
+                    //     ],
+                    //   ),
+                    //   alignment: Alignment.center,
+                    //   margin: const EdgeInsets.symmetric(horizontal: 60),
+                    //   // padding: const EdgeInsets.all(20),
+                    //   child: Text(
+                    //     widget.steps[index].title + " to take photo",
+                    //     textAlign: TextAlign.center,
+                    //     style: const TextStyle(
+                    //       color: Colors.black,
+                    //       fontSize: 12,
+                    //       fontWeight: FontWeight.bold,
+                    //     ),
+                    //   ),
+                    // ),
                   ),
                   isExiting: index != _currentIndex,
                 );

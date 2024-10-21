@@ -12,6 +12,30 @@ class LivelynessDetectionPageV2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop(null);
+            },
+            icon: const Icon(
+              Icons.close_rounded,
+              color: Colors.black,
+            )),
+        centerTitle: true,
+        title: const Padding(
+          padding: EdgeInsets.only(right: 0.0),
+          child: Text(
+            "Blink to take photo",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        backgroundColor: Colors.white,
+      ),
       body: SafeArea(
         child: LivelynessDetectionScreenV2(
           config: config,
@@ -492,32 +516,33 @@ class _LivelynessDetectionScreenAndroidState
             ],
           ),
         ),
-        Align(
-          alignment: Alignment.topRight,
-          child: Padding(
-            padding: const EdgeInsets.only(
-              right: 10,
-              top: 10,
-            ),
-            child: CircleAvatar(
-              radius: 20,
-              backgroundColor: Colors.black,
-              child: IconButton(
-                onPressed: () {
-                  _onDetectionCompleted(
-                    imgToReturn: null,
-                    didCaptureAutomatically: null,
-                  );
-                },
-                icon: const Icon(
-                  Icons.close_rounded,
-                  size: 20,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-        ),
+        // Align(
+        //   alignment: Alignment.topRight,
+        //   child: Padding(
+        //     padding: const EdgeInsets.only(
+        //       right: 10,
+        //       top: 30,
+        //     ),
+        //     child: CircleAvatar(
+        //       radius: 16,
+        //       backgroundColor: Colors.white,
+        //       child: IconButton(
+        //         onPressed: () {
+        //           _onDetectionCompleted(
+        //             imgToReturn: null,
+        //             didCaptureAutomatically: null,
+        //           );
+        //         },
+        //         icon: const Icon(
+        //           Icons.close_rounded,
+        //           size: 16,
+        //           color: Colors.black,
+        //         ),
+        //       ),
+        //     ),
+
+        //   ),
+        // ),
       ],
     );
   }
