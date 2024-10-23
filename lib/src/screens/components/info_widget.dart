@@ -1,21 +1,11 @@
 import 'package:livelyness_detection/index.dart';
 
-class LivelynessInfoWidget extends StatefulWidget {
+class LivelynessInfoWidget extends StatelessWidget {
   final VoidCallback onStartTap;
   const LivelynessInfoWidget({
     required this.onStartTap,
     super.key,
   });
-
-  @override
-  State<LivelynessInfoWidget> createState() => _LivelynessInfoWidgetState();
-}
-
-class _LivelynessInfoWidgetState extends State<LivelynessInfoWidget> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,8 +90,7 @@ class _LivelynessInfoWidgetState extends State<LivelynessInfoWidget> {
                             child: _buildPointWidget(
                               index: 1,
                               title: StringConstants.label.goodLighting,
-                              subTitle:
-                                  StringConstants.label.goodLightingSubText,
+                              subTitle: StringConstants.label.goodLightingSubText,
                             ),
                           ),
                         ),
@@ -129,7 +118,7 @@ class _LivelynessInfoWidgetState extends State<LivelynessInfoWidget> {
           ),
           Center(
             child: ElevatedButton(
-              onPressed: () => widget.onStartTap(),
+              onPressed: () => onStartTap(),
               style: TextButton.styleFrom(
                 elevation: 3,
                 padding: const EdgeInsets.symmetric(
@@ -203,7 +192,6 @@ class _LivelynessInfoWidgetState extends State<LivelynessInfoWidget> {
                   ),
                 ),
               ),
-              // const Spacer(),
               Expanded(
                 flex: 10,
                 child: Align(
