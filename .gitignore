@@ -7,6 +7,7 @@
 .fvm/release
 .fvm/version
 .fvm/versions/stable
+.fvm*
 
 .packages
 build/
@@ -31,3 +32,6 @@ doc/api/
 
 .flutter-plugins
 .flutter-plugins-dependencies
+
+# FVM Version Cache
+.fvm/
